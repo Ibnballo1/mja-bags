@@ -125,6 +125,11 @@ export async function getRelatedProducts(
         orderBy: [asc(productImages.sortOrder)],
         limit: 1,
       },
+      category: {
+        columns: {
+          name: true,
+        },
+      },
     },
     limit: limit + 1,
   });

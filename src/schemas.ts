@@ -16,20 +16,34 @@ export const signInSchema = z.object({
   password: z.string().min(1, "Password is required"),
 });
 
-export const addressSchema = z.object({
-  street: z.string().min(5, "Street address is required"),
-  city: z.string().min(2, "City is required"),
-  state: z.string().min(2, "State is required"),
-  postalCode: z.string().min(3, "Postal code is required"),
-  country: z.string().min(2, "Country is required").default("Nigeria"),
-});
+// export const addressSchema = z.object({
+//   street: z.string().min(5, "Street address is required"),
+//   city: z.string().min(2, "City is required"),
+//   state: z.string().min(2, "State is required"),
+//   postalCode: z.string().min(3, "Postal code is required"),
+//   country: z.string().min(2, "Country is required").default("Nigeria"),
+// });
+
+// export const checkoutSchema = z.object({
+//   customerName: z.string().min(2, "Full name is required"),
+//   customerEmail: z.string().email("Invalid email address"),
+//   customerPhone: z.string().optional(),
+//   shippingAddress: addressSchema,
+//   notes: z.string().max(500).optional(),
+// });
 
 export const checkoutSchema = z.object({
-  customerName: z.string().min(2, "Full name is required"),
-  customerEmail: z.string().email("Invalid email address"),
+  customerName: z.string().min(1, "Full name is required"),
+  customerEmail: z.string().email("Valid email is required"),
   customerPhone: z.string().optional(),
-  shippingAddress: addressSchema,
-  notes: z.string().max(500).optional(),
+  notes: z.string().optional(),
+  shippingAddress: z.object({
+    street: z.string().min(1, "Street is required"),
+    city: z.string().min(1, "City is required"),
+    state: z.string().min(1, "State is required"),
+    postalCode: z.string().min(1, "Postal code is required"),
+    country: z.string().min(1, "Country is required"), // ✅ required
+  }),
 });
 
 export const productSchema = z.object({
@@ -96,7 +110,7 @@ export const productFiltersSchema = z.object({
 
 export type SignUpInput = z.infer<typeof signUpSchema>;
 export type SignInInput = z.infer<typeof signInSchema>;
-export type AddressInput = z.infer<typeof addressSchema>;
+// export type AddressInput = z.infer<typeof addressSchema>;
 export type CheckoutInput = z.infer<typeof checkoutSchema>;
 export type ProductInput = z.infer<typeof productSchema>;
 export type CategoryInput = z.infer<typeof categorySchema>;
