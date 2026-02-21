@@ -3,7 +3,8 @@ import crypto from "crypto";
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY!;
 const PAYSTACK_BASE_URL = "https://api.paystack.co";
 
-interface PaystackHeaders extends Record<string, string> {
+interface PaystackHeaders {
+  [key: string]: string;
   Authorization: string;
   "Content-Type": string;
 }

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Package, Shield, Truck } from "lucide-react";
-import { getProductBySlug, getRelatedProducts } from "../../actions/product";
+import { getProductBySlug, getRelatedProducts } from "@/src/actions/product";
 import ProductGallery from "@/src/components/product/product-gallery";
 import AddToCartButton from "@/src/components/product/add-to-cart";
 import ProductCard from "@/src/components/product/product-card";
-import { Badge } from "@/src/components/ui/badge";
-import { Separator } from "@/src/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import {
   formatPrice,
   getDiscountPercentage,
@@ -120,7 +120,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   {formatPrice(product.compareAtPrice)}
                 </span>
               )}
-              {discount && <Badge variant="default">-{discount}% OFF</Badge>}
+              {discount && <Badge variant="secondary">-{discount}% OFF</Badge>}
             </div>
 
             {/* Stock */}
