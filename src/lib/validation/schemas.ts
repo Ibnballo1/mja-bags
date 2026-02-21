@@ -51,7 +51,7 @@ export const productSchema = z.object({
   categoryId: z.string().uuid().optional().nullable(),
   isFeatured: z.boolean().default(false),
   isActive: z.boolean().default(true),
-  metadata: z.record(z.string(), z.string()).optional(),
+  metadata: z.record(z.string(), z.any()).optional(),
 });
 
 export const categorySchema = z.object({
@@ -97,8 +97,8 @@ export const productFiltersSchema = z.object({
 export type SignUpInput = z.infer<typeof signUpSchema>;
 export type SignInInput = z.infer<typeof signInSchema>;
 export type AddressInput = z.infer<typeof addressSchema>;
-export type CheckoutInput = z.infer<typeof checkoutSchema>;
+export type CheckoutInput = z.input<typeof checkoutSchema>;
 export type ProductInput = z.infer<typeof productSchema>;
-export type CategoryInput = z.infer<typeof categorySchema>;
+export type CategoryInput = z.input<typeof categorySchema>;
 export type OrderStatusUpdateInput = z.infer<typeof orderStatusUpdateSchema>;
 export type ProductFiltersInput = z.infer<typeof productFiltersSchema>;

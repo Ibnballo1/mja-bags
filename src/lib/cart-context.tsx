@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, useContext, type ReactNode } from "react";
-import { useCart } from "./hooks/use-cart";
-import type { CartItem, Cart } from "./types";
+import { useCart } from "@/src/hooks/use-cart";
+import type { CartItem, Cart } from "@/src/types";
 
 interface CartContextValue {
   cart: Cart;

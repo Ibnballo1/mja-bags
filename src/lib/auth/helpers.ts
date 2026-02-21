@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
-import { auth } from "./auth";
-import { db } from "..";
-import { user } from "../db/schema";
+import { auth } from "../auth";
+import { db } from "@/src/db";
+import { user } from "../../db/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
@@ -15,7 +15,7 @@ export async function getServerSession() {
 export async function requireAuth() {
   const session = await getServerSession();
   if (!session) {
-    redirect("/auth/login");
+    redirect("/login");
   }
   return session;
 }

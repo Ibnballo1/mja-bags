@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MJA Bags — Premium E-Commerce Platform
 
-## Getting Started
+A production-grade e-commerce platform built with Next.js 15, TypeScript, Supabase, Drizzle ORM, BetterAuth, and Paystack.
 
-First, run the development server:
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript (strict mode)
+- **Database**: Supabase (PostgreSQL) + Drizzle ORM
+- **Auth**: BetterAuth
+- **Payments**: Paystack
+- **Storage**: Supabase Storage
+- **Styling**: TailwindCSS + shadcn/ui
+- **Deployment**: Vercel
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── (store)/            # Store routes
+│   ├── admin/              # Admin dashboard (role-protected)
+│   ├── api/                # API routes (auth, webhooks, upload)
+│   ├── auth/               # Login / Register pages
+│   ├── account/            # User dashboard
+│   ├── checkout/           # Checkout flow
+│   └── orders/             # Order confirmation
+├── actions/                # Server Actions
+│   ├── products.ts
+│   ├── categories.ts
+│   ├── orders.ts
+│   └── payment.ts
+├── components/
+│   ├── ui/                 # Base UI components
+│   ├── layout/             # Header, Footer
+│   ├── product/            # Product card, gallery, add-to-cart
+│   ├── cart/               # Cart drawer
+│   ├── shop/               # Filters, pagination
+│   ├── admin/              # Admin-specific components
+│   └── account/            # Account components
+├── db/
+│   ├── schema/             # Drizzle schema definitions
+│   ├── migrations/         # Generated SQL migrations
+│   └── index.ts            # DB connection
+├── lib/
+│   ├── auth/               # BetterAuth config + helpers
+│   ├── payment/            # Paystack integration
+│   ├── validation/         # Zod schemas
+│   ├── supabase.ts         # Supabase client + storage
+│   ├── cart-context.tsx    # Cart state provider
+│   └── utils.ts            # Utility functions
+├── hooks/
+│   └── use-cart.ts         # Cart localStorage hook
+└── types/
+    └── index.ts            # Shared TypeScript types
+```
+
+## Setup
+
+### 1. Clone and install
+
+```bash
+git clone <repo>
+cd mja-bags
+npm install
+```
+
+### 2. Environment variables
+
+```bash
+cp .env.example .env.local
+```
+
+Fill in all required values:
+
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+
+# Database (Direct connection for Drizzle)
+DATABASE_URL=postgresql://postgres:[password]@db.[project-ref].supabase.co:5432/postgres
+
+# BetterAuth
+BETTER_AUTH_SECRET=generate-with-openssl-rand-base64-32
+BETTER_AUTH_URL=https://your-domain.com
+
+# Paystack
+PAYSTACK_SECRET_KEY=sk_live_xxxxx
+NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY=pk_live_xxxxx
+PAYSTACK_WEBHOOK_SECRET=your-webhook-secret
+
+# App
+NEXT_PUBLIC_APP_URL=https://your-domain.com
+```
+
+### 3. Set up Supabase Storage
+
+1. Go to Supabase Dashboard → Storage
+2. Create a bucket called `product-images`
+3. Set bucket to **Public**
+4. Add the following RLS policy for uploads (service role bypasses RLS)
+
+### 4. Run database migrations
+
+```bash
+npm run db:generate
+npm run db:migrate
+```
+
+### 5. Create an admin user
+
+After registering a user account, update their role directly in the database:
+
+```sql
+UPDATE users SET role = 'admin' WHERE email = 'your@email.com';
+```
+
+### 6. Set up Paystack Webhooks
+
+1. Go to Paystack Dashboard → Settings → API Keys & Webhooks
+2. Add webhook URL: `https://your-domain.com/api/webhooks/paystack`
+3. Copy the webhook secret to `PAYSTACK_WEBHOOK_SECRET`
+
+### 7. Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment (Vercel)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+vercel --prod
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Set all environment variables in Vercel dashboard. Use Supabase connection pooling URL (port 6543) for `DATABASE_URL` in production for better performance with serverless.
 
-## Learn More
+## Admin Access
 
-To learn more about Next.js, take a look at the following resources:
+Navigate to `/admin` after setting your user role to `admin`. Admin features:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Dashboard**: Revenue, orders, products, customer stats
+- **Products**: Full CRUD with image upload
+- **Categories**: Manage product categories
+- **Orders**: View all orders, update order status
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Payment Flow
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Customer fills checkout form → Server Action creates order in DB
+2. Paystack payment initialized → Customer redirected to Paystack
+3. Customer completes payment → Paystack redirects to `/orders/confirm`
+4. Server verifies transaction with Paystack API
+5. Order and payment status updated in DB
+6. Paystack webhook also fires for redundancy (idempotent processing)
