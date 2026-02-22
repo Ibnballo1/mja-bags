@@ -52,9 +52,14 @@ export async function verifyAndUpdatePayment(reference: string) {
   return { success: isSuccess, payment: existingPayment };
 }
 
-export async function getOrderByPaystackReference(reference: string) {
+export async function getOrderByPaystackReference(
+  reference: string | string[],
+) {
+  const cleanReference = Array.isArray(reference) ? reference[0] : reference;
+
+  if (!cleanReference) return null;
   const payment = await db.query.payments.findFirst({
-    where: eq(payments.paystackReference, reference),
+    where: eq(payments.paystackReference, cleanReference),
   });
 
   if (!payment) return null;

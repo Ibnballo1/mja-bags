@@ -110,7 +110,7 @@ export async function createOrder(
       orderNumber: order.orderNumber,
       customerName: validated.customerName,
     },
-    callback_url: `${process.env.NEXT_PUBLIC_APP_URL}/orders/confirm?reference=${reference}`,
+    callback_url: `${process.env.NEXT_PUBLIC_APP_URL}/orders/confirm`,
   });
 
   return {

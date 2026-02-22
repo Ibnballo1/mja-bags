@@ -3,7 +3,10 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle2, XCircle, Package } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
-import { getOrderByPaystackReference } from "../../../../actions/payments";
+import {
+  getOrderByPaystackReference,
+  verifyAndUpdatePayment,
+} from "../../../../actions/payments";
 import { formatPrice, formatDate } from "@/src/lib/utils";
 import { Badge } from "@/src/components/ui/badge";
 
@@ -11,19 +14,29 @@ interface OrderConfirmPageProps {
   searchParams: Promise<{ reference?: string }>;
 }
 
-async function OrderConfirmContent({ reference }: { reference: string }) {
-  const result = await getOrderByPaystackReference(reference);
+async function OrderConfirmContent({
+  reference,
+}: {
+  reference: string | string[];
+}) {
+  const cleanReference = Array.isArray(reference) ? reference[0] : reference;
+  let result;
+  try {
+    result = await verifyAndUpdatePayment(cleanReference);
+  } catch (error) {
+    console.error("Verification failed:", error);
+  }
 
-  if (!result) {
+  const data = await getOrderByPaystackReference(cleanReference);
+
+  if (!data) {
     return (
       <div className="text-center py-16">
         <XCircle className="h-16 w-16 text-red-400 mx-auto mb-4" />
         <h2 className="font-serif text-2xl font-bold text-[#1E1E1E] mb-2">
           Order Not Found
         </h2>
-        <p className="text-[#6B7280] mb-6">
-          We could not find this order. Please contact support.
-        </p>
+        <p className="text-[#6B7280] mb-6">Reference: {cleanReference}</p>
         <Button asChild>
           <Link href="/shop">Back to Shop</Link>
         </Button>
@@ -31,7 +44,7 @@ async function OrderConfirmContent({ reference }: { reference: string }) {
     );
   }
 
-  const { order, payment } = result;
+  const { order, payment } = data;
   const isSuccess = payment?.status === "success";
 
   return (
@@ -44,7 +57,7 @@ async function OrderConfirmContent({ reference }: { reference: string }) {
               <CheckCircle2 className="h-10 w-10 text-green-600" />
             </div>
             <h1 className="font-serif text-3xl font-bold text-[#1E1E1E] mb-2">
-              Payment Successful!
+              Order {order.orderNumber} is {order.status}
             </h1>
             <p className="text-[#6B7280]">
               Thank you for your order. We&apos;ll send a confirmation to{" "}
