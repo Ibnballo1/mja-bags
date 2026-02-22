@@ -15,20 +15,24 @@ import {
 } from "@/src/lib/utils";
 
 interface ProductPageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
+
+export const dynamicParams = true; // Enable dynamic params for product slugs
 
 export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const product = await getProductBySlug(slug);
 
-  if (!product) return {};
+  // If no product is found during build, return a generic title
+  if (!product) return { title: "Product Not Found" };
 
   return {
     title: product.name,
-    description: product.shortDescription ?? product.description.slice(0, 160),
+    description:
+      product.shortDescription ?? product.description.slice(0, 160) ?? "",
     openGraph: {
       title: `${product.name} | MJA Bags`,
       description:
@@ -39,7 +43,7 @@ export async function generateMetadata({
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const product = await getProductBySlug(slug);
 
   if (!product) notFound();
@@ -50,9 +54,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
     4,
   );
 
-  const discount = getDiscountPercentage(product.price, product.compareAtPrice);
-  const inStock = isInStock(product.stockQuantity);
-  const lowStock = getLowStockThreshold(product.stockQuantity);
+  // 2. SAFETY: Ensure values passed to utils are never undefined
+  // Even if the DB has a null value, use ?? to provide a valid number/string
+  const discount = getDiscountPercentage(
+    product.price ?? 0,
+    product.compareAtPrice ?? null,
+  );
+  const inStock = isInStock(product.stockQuantity ?? 0);
+  const lowStock = getLowStockThreshold(product.stockQuantity ?? 0);
   const primaryImage = product.images[0];
 
   return (

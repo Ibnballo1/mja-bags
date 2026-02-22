@@ -95,6 +95,7 @@ export async function getFeaturedProducts(limit = 8) {
 }
 
 export async function getProductBySlug(slug: string) {
+  if (!slug) return null;
   return db.query.products.findFirst({
     where: and(
       isNull(products.deletedAt),
@@ -116,6 +117,7 @@ export async function getRelatedProducts(
   limit = 4,
 ) {
   const conditions = [isNull(products.deletedAt), eq(products.isActive, true)];
+  if (!categoryId) return [];
 
   if (categoryId) {
     conditions.push(eq(products.categoryId, categoryId));
