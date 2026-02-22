@@ -18,7 +18,24 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const stats = await getAdminStats();
+  let stats;
+  try {
+    stats = await getAdminStats();
+  } catch (error) {
+    console.error("Failed to fetch stats:", error);
+  }
+
+  // 2. Fallback if stats are missing to prevent UNDEFINED_VALUE errors
+  if (!stats) {
+    return (
+      <div className="p-8 text-center">
+        <h1 className="text-xl font-bold">Dashboard Unavailable</h1>
+        <p className="text-gray-500">
+          Please check your database connection and environment variables.
+        </p>
+      </div>
+    );
+  }
 
   const statCards = [
     {

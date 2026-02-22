@@ -93,7 +93,7 @@ export default function ProductForm({
           price: parseFloat(initialData.price),
           compareAtPrice: initialData.compareAtPrice
             ? parseFloat(initialData.compareAtPrice)
-            : undefined,
+            : null,
           categoryId: initialData.categoryId ?? undefined,
           sku: initialData.sku ?? undefined,
           shortDescription: initialData.shortDescription ?? undefined,

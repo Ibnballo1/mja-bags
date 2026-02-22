@@ -16,7 +16,7 @@ const PUBLIC_PATHS = [
 const ADMIN_PATHS = ["/admin"];
 const AUTH_PATHS = ["/account", "/checkout", "/orders"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Allow public paths
