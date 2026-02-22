@@ -18,6 +18,10 @@ const AUTH_PATHS = ["/account", "/checkout", "/orders"];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const possibleCookieNames = [
+    "mja.session_token",
+    "__Secure-mja.session_token",
+  ];
 
   // Allow public paths
   if (
@@ -44,7 +48,10 @@ export async function proxy(request: NextRequest) {
 
   if (isAdminPath || isAuthPath) {
     // Get session from cookie (using BetterAuth session token)
-    const sessionToken = request.cookies.get("mja.session_token")?.value;
+    // const sessionToken = request.cookies.get("mja.session_token")?.value;
+    const sessionToken = possibleCookieNames
+      .map((name) => request.cookies.get(name)?.value)
+      .find(Boolean);
 
     if (!sessionToken) {
       const loginUrl = new URL("/auth/login", request.url);
