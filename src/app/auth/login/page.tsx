@@ -52,8 +52,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cream-50 px-4">
-      <div className="w-full max-w-md">
+    <div className="flex-1 flex flex-col items-center justify-center p-6 lg:p-12">
+      <div className="w-full max-w-[400px]">
         {/* Logo */}
         <div className="text-center mb-10">
           <Link

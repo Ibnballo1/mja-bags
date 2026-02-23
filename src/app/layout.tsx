@@ -65,9 +65,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="bg-[#F8F9F6] text-[#1E1E1E] font-sans antialiased">
-        <main className="min-h-screen">{children}</main>
-        <Toaster />
+      <body className="bg-background text-foreground font-sans antialiased bg-noise">
+        <main className="min-h-screen relative flex flex-col">{children}</main>
+        <Toaster closeButton richColors position="top-center" />
       </body>
     </html>
   );

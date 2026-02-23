@@ -1,3 +1,5 @@
+// src/app/admin/products/new/page.tsx
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";

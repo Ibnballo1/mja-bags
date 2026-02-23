@@ -1,3 +1,5 @@
+// src/components/layout/header.tsx
+
 "use client";
 
 import Link from "next/link";
@@ -6,7 +8,7 @@ import { ShoppingBag, Menu, X, User, Search } from "lucide-react";
 import { useCartContext } from "@/src/lib/cart-context";
 import { authClient } from "@/src/lib/auth/client";
 import { Button } from "@/src/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/lib/utils";
 import CartDrawer from "../cart/cart-drawer";
 
 const navLinks = [
@@ -34,54 +36,61 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-soft border-b border-cream-200"
-            : "bg-transparent",
+            ? "bg-background/90 border-b border-border shadow-sm py-2"
+            : "bg-transparent py-4",
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-14 lg:h-16">
             {/* Logo */}
             <Link
               href="/"
-              className="font-serif text-2xl font-bold text-olive-700 tracking-tight hover:text-olive-900 transition-colors"
+              className="group flex items-center gap-1 font-serif text-2xl lg:text-3xl font-bold text-secondary tracking-tighter transition-transform active:scale-95"
             >
               MJA
-              <span className="text-gold-400">.</span>
+              <span className="text-secondary group-hover:animate-pulse">
+                .
+              </span>
             </Link>
 
-            {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-8">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-10">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-[#6B7280] hover:text-olive-700 transition-colors tracking-wide"
+                  className="relative text-[13px] uppercase tracking-[0.15em] font-semibold text-foreground/70 hover:text-primary transition-colors after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-secondary after:transition-all hover:after:w-full"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
 
-            {/* Actions */}
-            <div className="flex items-center gap-2">
+            {/* Action Icons */}
+            <div className="flex items-center gap-1 sm:gap-3">
               <Button
                 variant="ghost"
                 size="icon"
-                className="hidden lg:flex"
+                className="hidden sm:flex text-foreground/70 hover:text-primary hover:bg-primary/5"
                 asChild
               >
                 <Link href="/shop">
-                  <Search className="h-5 w-5" />
+                  <Search className="h-[22px] w-[22px]" />
                   <span className="sr-only">Search</span>
                 </Link>
               </Button>
 
               {session ? (
-                <Button variant="ghost" size="icon" asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-foreground/70 hover:text-primary hover:bg-primary/5"
+                  asChild
+                >
                   <Link href="/account">
-                    <User className="h-5 w-5" />
+                    <User className="h-[22px] w-[22px]" />
                     <span className="sr-only">Account</span>
                   </Link>
                 </Button>
@@ -90,81 +99,107 @@ export default function Header() {
                   variant="ghost"
                   size="sm"
                   asChild
-                  className="hidden lg:flex"
+                  className="hidden lg:flex text-foreground/70 hover:text-primary font-bold tracking-tight"
                 >
-                  <Link href="/login">Sign in</Link>
+                  <Link href="/auth/login">Sign in</Link>
                 </Button>
               )}
 
               <Button
                 variant="ghost"
                 size="icon"
-                className="relative"
+                className="relative text-foreground/70 hover:text-primary hover:bg-primary/5"
                 onClick={() => setIsCartOpen(true)}
               >
-                <ShoppingBag className="h-5 w-5" />
+                <ShoppingBag className="h-[22px] w-[22px]" />
                 {isHydrated && cart.itemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-olive-600 text-[10px] font-bold text-white flex items-center justify-center">
+                  <span className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-primary text-[9px] font-black text-primary-foreground flex items-center justify-center ring-2 ring-background">
                     {cart.itemCount > 9 ? "9+" : cart.itemCount}
                   </span>
                 )}
                 <span className="sr-only">Cart</span>
               </Button>
 
-              {/* Mobile menu */}
+              {/* Mobile toggle */}
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden"
+                className="lg:hidden text-foreground hover:bg-primary/5"
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
               >
                 {isMobileOpen ? (
-                  <X className="h-5 w-5" />
+                  <X className="h-6 w-6" />
                 ) : (
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-6 w-6" />
                 )}
               </Button>
             </div>
           </div>
         </div>
 
-        {/* Mobile nav */}
-        {isMobileOpen && (
-          <div className="lg:hidden bg-white border-t border-cream-200 px-4 py-6 space-y-4 shadow-card">
+        {/* Mobile Sidebar Menu */}
+        <div
+          className={cn(
+            "fixed inset-0 top-[60px] z-50 lg:hidden bg-background/95 backdrop-blur-2xl transition-all duration-300 ease-in-out transform",
+            isMobileOpen
+              ? "translate-x-0 opacity-100"
+              : "translate-x-full opacity-0",
+          )}
+        >
+          <nav className="flex flex-col p-8 space-y-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-base font-medium text-[#1E1E1E] hover:text-olive-700 transition-colors py-1"
+                className="text-2xl font-serif font-bold text-foreground hover:text-primary transition-colors border-b border-border pb-4"
                 onClick={() => setIsMobileOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <div className="pt-4 border-t border-cream-200">
+
+            <div className="pt-8 space-y-4">
               {session ? (
                 <Link
                   href="/account"
-                  className="block text-base font-medium text-[#1E1E1E] hover:text-olive-700 transition-colors py-1"
+                  className="flex items-center gap-3 text-lg font-bold text-primary"
                   onClick={() => setIsMobileOpen(false)}
                 >
-                  My Account
+                  <User className="h-5 w-5" />
+                  My Account Dashboard
                 </Link>
               ) : (
-                <div className="flex gap-3">
-                  <Link href="/login" onClick={() => setIsMobileOpen(false)}>
-                    <Button variant="outline" size="sm">
+                <div className="grid grid-cols-2 gap-4">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="rounded-xl border-border h-14"
+                    asChild
+                  >
+                    <Link
+                      href="/auth/login"
+                      onClick={() => setIsMobileOpen(false)}
+                    >
                       Sign in
-                    </Button>
-                  </Link>
-                  <Link href="/register" onClick={() => setIsMobileOpen(false)}>
-                    <Button size="sm">Register</Button>
-                  </Link>
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    className="rounded-xl bg-primary h-14"
+                    asChild
+                  >
+                    <Link
+                      href="/auth/register"
+                      onClick={() => setIsMobileOpen(false)}
+                    >
+                      Register
+                    </Link>
+                  </Button>
                 </div>
               )}
             </div>
-          </div>
-        )}
+          </nav>
+        </div>
       </header>
 
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

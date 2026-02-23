@@ -156,6 +156,9 @@ export async function createProduct(
       compareAtPrice: validated.compareAtPrice
         ? String(validated.compareAtPrice)
         : null,
+      sku: validated.sku?.trim() || null,
+      shortDescription: validated.shortDescription?.trim() || null,
+      categoryId: validated.categoryId || null,
     })
     .returning();
 
