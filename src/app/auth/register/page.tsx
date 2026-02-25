@@ -62,13 +62,13 @@ export default function RegisterPage() {
             href="/"
             className="font-serif text-3xl font-bold text-olive-700"
           >
-            MJA<span className="text-gold-400">.</span>
+            MAJ<span className="text-gold-400">.</span>
           </Link>
           <h1 className="font-serif text-2xl font-semibold text-[#1E1E1E] mt-6 mb-2">
             Create Account
           </h1>
           <p className="text-[#6B7280] text-sm">
-            Join MJA and discover premium bags
+            Join MAJ and discover premium bags
           </p>
         </div>
 

@@ -47,7 +47,7 @@ export default async function AdminLayout({
             href="/admin"
             className="font-serif text-2xl font-bold text-olive-700"
           >
-            MJA<span className="text-gold-400">.</span>
+            MAJ<span className="text-gold-400">.</span>
           </Link>
           <p className="text-xs text-[#6B7280] mt-0.5 tracking-wide font-medium">
             Admin Console
@@ -99,7 +99,7 @@ export default async function AdminLayout({
             href="/admin"
             className="font-serif text-xl font-bold text-olive-700"
           >
-            MJA<span className="text-gold-400">.</span>
+            MAJ<span className="text-gold-400">.</span>
             <span className="text-xs text-[#6B7280] font-sans font-normal ml-1.5">
               Admin
             </span>

@@ -11,9 +11,9 @@ import { getCategories } from "@/src/actions/categories";
 import { formatPrice } from "@/src/lib/utils";
 
 export const metadata: Metadata = {
-  title: "MJA Bags — Premium Lifestyle Bags",
+  title: "MAJ Bags — Premium Lifestyle Bags",
   description:
-    "Discover MJA Bags — premium handcrafted bags for those who appreciate quality, craftsmanship, and timeless elegance.",
+    "Discover MAJ Bags — premium handcrafted bags for those who appreciate quality, craftsmanship, and timeless elegance.",
 };
 
 export const revalidate = 3600; // ISR every hour
@@ -105,7 +105,7 @@ export default async function HomePage() {
                 <div className="absolute inset-0 rounded-3xl flex flex-col items-center justify-center">
                   <div className="text-center text-primary-foreground/20">
                     <div className="font-serif text-8xl font-bold tracking-tighter">
-                      MJA
+                      MAJ
                     </div>
                     <div className="text-sm tracking-[0.3em] mt-2 font-light">
                       BAGS
@@ -270,7 +270,7 @@ export default async function HomePage() {
             <span className="italic text-primary">Discerning Few</span>
           </h2>
           <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed mb-12 max-w-2xl mx-auto">
-            Every MJA bag is a testament to meticulous craftsmanship, premium
+            Every MAJ bag is a testament to meticulous craftsmanship, premium
             materials, and thoughtful design. We believe that what you carry
             reflects who you are.
           </p>

@@ -38,7 +38,7 @@ export default function Footer() {
               href="/"
               className="font-serif text-3xl lg:text-4xl font-bold tracking-tighter hover:text-secondary transition-colors"
             >
-              MJA<span className="text-secondary">.</span>
+              MAJ<span className="text-secondary">.</span>
             </Link>
             <p className="mt-6 text-base text-primary-foreground/70 leading-relaxed max-w-xs">
               Handcrafting premium lifestyle bags for those who appreciate the
@@ -64,7 +64,7 @@ export default function Footer() {
                 <Twitter className="h-5 w-5" />
               </a>
               <a
-                href="mailto:hello@mjabags.com"
+                href="mailto:hello@majbags.com"
                 className="p-2 rounded-full border border-primary-foreground/20 hover:border-secondary hover:text-secondary transition-all"
                 aria-label="Email"
               >
@@ -100,7 +100,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <p className="text-sm text-primary-foreground/40 font-medium tracking-wide">
-              © {new Date().getFullYear()} MJA Bags. Created with intention.
+              © {new Date().getFullYear()} MAJ Bags. Created with intention.
             </p>
           </div>
 

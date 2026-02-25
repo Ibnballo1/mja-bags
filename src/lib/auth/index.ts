@@ -27,7 +27,7 @@ export const auth = betterAuth({
     updateAge: 60 * 60 * 24, // 1 day
   },
   advanced: {
-    cookiePrefix: "mja",
+    cookiePrefix: "maj",
     generateId: () => crypto.randomUUID(),
     defaultCookieAttributes: {
       secure: process.env.NODE_ENV === "production",

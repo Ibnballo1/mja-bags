@@ -109,9 +109,10 @@ export default function ProductForm({
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e.target.value;
-    register("name").onChange(e);
+    // register("name").onChange(e);
+    setValue("name", name, { shouldValidate: true });
     if (!isEdit) {
-      setValue("slug", slugify(name));
+      setValue("slug", slugify(name), { shouldValidate: true });
     }
   }
 
@@ -206,9 +207,11 @@ export default function ProductForm({
                 <Label htmlFor="name">Product Name *</Label>
                 <Input
                   id="name"
-                  {...register("name", {
-                    onChange: handleNameChange,
-                  })}
+                  {...register("name")} // Keep this for registration
+                  onChange={(e) => {
+                    // This overrides the register's onChange safely
+                    handleNameChange(e);
+                  }}
                   className="mt-1.5"
                   placeholder="Premium Leather Tote"
                 />
@@ -387,7 +390,7 @@ export default function ProductForm({
                   id="sku"
                   {...register("sku")}
                   className="mt-1.5 font-mono"
-                  placeholder="MJA-001"
+                  placeholder="MAJ-001"
                 />
               </div>
 

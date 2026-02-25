@@ -49,7 +49,7 @@ export default function Header() {
               href="/"
               className="group flex items-center gap-1 font-serif text-2xl lg:text-3xl font-bold text-secondary tracking-tighter transition-transform active:scale-95"
             >
-              MJA
+              MAJ
               <span className="text-secondary group-hover:animate-pulse">
                 .
               </span>

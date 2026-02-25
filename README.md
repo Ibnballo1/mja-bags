@@ -1,4 +1,4 @@
-# MJA Bags — Premium E-Commerce Platform
+# MAJ Bags — Premium E-Commerce Platform
 
 A production-grade e-commerce platform built with Next.js 15, TypeScript, Supabase, Drizzle ORM, BetterAuth, and Paystack.
 
@@ -61,7 +61,7 @@ src/
 
 ```bash
 git clone <repo>
-cd mja-bags
+cd maj-bags
 npm install
 ```
 

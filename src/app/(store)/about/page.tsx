@@ -6,7 +6,7 @@ import { Button } from "@/src/components/ui/button";
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "Learn the story behind MJA Bags — a Lagos-born brand built on the belief that what you carry should reflect who you are.",
+    "Learn the story behind MAJ Bags — a Lagos-born brand built on the belief that what you carry should reflect who you are.",
 };
 
 const values = [
@@ -40,7 +40,7 @@ const milestones = [
   {
     year: "2019",
     title: "The Beginning",
-    body: "MJA was born in a small Lagos workshop. Our founder, frustrated by the lack of premium, locally-made bags, decided to create them herself — starting with ten totes sold to friends.",
+    body: "MAJ was born in a small Lagos workshop. Our founder, frustrated by the lack of premium, locally-made bags, decided to create them herself — starting with ten totes sold to friends.",
   },
   {
     year: "2021",
@@ -50,7 +50,7 @@ const milestones = [
   {
     year: "2023",
     title: "Refining the Vision",
-    body: "We moved into a larger studio, brought on master leather workers, and launched our signature Olive Collection — the range that defined the MJA aesthetic.",
+    body: "We moved into a larger studio, brought on master leather workers, and launched our signature Olive Collection — the range that defined the MAJ aesthetic.",
   },
   {
     year: "2024",
@@ -84,7 +84,7 @@ export default function AboutPage() {
             <span className="text-gold-400">Built for the World.</span>
           </h1>
           <p className="text-olive-200 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
-            MJA is not a fashion label chasing trends. We are a craft house
+            MAJ is not a fashion label chasing trends. We are a craft house
             obsessed with one thing: making the most considered bags on the
             continent — and eventually, the world.
           </p>
@@ -114,7 +114,7 @@ export default function AboutPage() {
             So I made it.&rdquo;
           </p>
           <p className="text-center text-[#6B7280] mt-6 text-sm">
-            — Founder, MJA Bags
+            — Founder, MAJ Bags
           </p>
         </div>
       </section>
@@ -157,7 +157,7 @@ export default function AboutPage() {
               <div className="aspect-square rounded-3xl bg-gradient-to-br from-olive-100 to-cream-200 flex items-center justify-center">
                 <div className="text-center">
                   <p className="font-serif text-8xl font-bold text-olive-300">
-                    MJA
+                    MAJ
                   </p>
                   <p className="text-olive-400 text-sm tracking-[0.4em] mt-2">
                     EST. 2019
@@ -275,7 +275,7 @@ export default function AboutPage() {
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-cream-200 to-cream-300" />
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-gold-100 to-gold-200 flex items-center justify-center">
                 <p className="font-serif text-4xl font-bold text-gold-600 opacity-50">
-                  MJA
+                  MAJ
                 </p>
               </div>
             </div>

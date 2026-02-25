@@ -17,24 +17,24 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "MJA Bags — Premium Lifestyle Bags",
-    template: "%s | MJA Bags",
+    default: "MAJ Bags — Premium Lifestyle Bags",
+    template: "%s | MAJ Bags",
   },
   description:
-    "Discover MJA Bags — premium handcrafted bags for those who appreciate quality, craftsmanship, and timeless elegance.",
+    "Discover MAJ Bags — premium handcrafted bags for those who appreciate quality, craftsmanship, and timeless elegance.",
   keywords: [
     "premium bags",
     "luxury handbags",
     "leather bags",
     "tote bags",
-    "MJA Bags",
+    "MAJ Bags",
   ],
   openGraph: {
     type: "website",
     locale: "en_NG",
     url: process.env.NEXT_PUBLIC_APP_URL,
-    siteName: "MJA Bags",
-    title: "MJA Bags — Premium Lifestyle Bags",
+    siteName: "MAJ Bags",
+    title: "MAJ Bags — Premium Lifestyle Bags",
     description:
       "Premium handcrafted bags for those who appreciate quality and timeless elegance.",
     images: [
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "MJA Bags",
+        alt: "MAJ Bags",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MJA Bags — Premium Lifestyle Bags",
+    title: "MAJ Bags — Premium Lifestyle Bags",
     description:
       "Premium handcrafted bags for those who appreciate quality and timeless elegance.",
   },

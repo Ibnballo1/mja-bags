@@ -34,7 +34,7 @@ export async function generateMetadata({
     description:
       product.shortDescription ?? product.description.slice(0, 160) ?? "",
     openGraph: {
-      title: `${product.name} | MJA Bags`,
+      title: `${product.name} | MAJ Bags`,
       description:
         product.shortDescription ?? product.description.slice(0, 160),
       images: product.images[0]?.url ? [product.images[0].url] : [],

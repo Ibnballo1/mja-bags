@@ -19,7 +19,7 @@ import { formatPrice, formatDate } from "@/src/lib/utils";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard | MJA Bags",
+  title: "Admin Dashboard | MAJ Bags",
 };
 
 export const dynamic = "force-dynamic";
@@ -90,7 +90,7 @@ export default async function AdminDashboard() {
         <h1 className="font-serif text-3xl font-bold text-[#1E1E1E]">
           Dashboard
         </h1>
-        <p className="text-[#6B7280] mt-1">Welcome back to MJA Admin</p>
+        <p className="text-[#6B7280] mt-1">Welcome back to MAJ Admin</p>
       </div>
 
       {/* Stats - Grid adjustments for tiny screens */}

@@ -103,5 +103,5 @@ export function verifyPaystackWebhook(
 export function generatePaymentReference(orderId: string): string {
   const timestamp = Date.now();
   const random = Math.random().toString(36).substring(2, 8).toUpperCase();
-  return `MJA-${orderId.slice(0, 8).toUpperCase()}-${timestamp}-${random}`;
+  return `MAJ-${orderId.slice(0, 8).toUpperCase()}-${timestamp}-${random}`;
 }

@@ -61,9 +61,14 @@ export default function CategoryFormDialog({
   });
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
-    register("name").onChange(e);
+    const value = e.target.value;
+
+    // 1. Manually update the 'name' field in the form state
+    setValue("name", value, { shouldValidate: true });
+
+    // 2. Update the slug if not in edit mode
     if (!isEdit) {
-      setValue("slug", slugify(e.target.value));
+      setValue("slug", slugify(value), { shouldValidate: true });
     }
   }
 
@@ -100,7 +105,11 @@ export default function CategoryFormDialog({
             <Label htmlFor="cat-name">Name *</Label>
             <Input
               id="cat-name"
-              {...register("name", { onChange: handleNameChange })}
+              {...register("name")} // Keep this for registration
+              onChange={(e) => {
+                // This overrides the register's onChange safely
+                handleNameChange(e);
+              }}
               className="mt-1.5"
               placeholder="Tote Bags"
             />

@@ -28,7 +28,7 @@ interface Order {
 }
 
 export const metadata: Metadata = {
-  title: "My Account | MJA Bags",
+  title: "My Account | MAJ Bags",
 };
 
 export const dynamic = "force-dynamic";

@@ -5,7 +5,7 @@
 import { useState, useEffect, useCallback } from "react";
 import type { CartItem, Cart } from "../types";
 
-const CART_KEY = "mja_cart";
+const CART_KEY = "maj_cart";
 
 function calculateCart(items: CartItem[]): Cart {
   const subtotal = items.reduce(

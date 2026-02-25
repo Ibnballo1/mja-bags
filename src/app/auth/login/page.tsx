@@ -60,7 +60,7 @@ export default function LoginPage() {
             href="/"
             className="font-serif text-3xl font-bold text-olive-700"
           >
-            MJA<span className="text-gold-400">.</span>
+            MAJ<span className="text-gold-400">.</span>
           </Link>
           <h1 className="font-serif text-2xl font-semibold text-[#1E1E1E] mt-6 mb-2">
             Welcome Back
