@@ -13,14 +13,14 @@ import ContactForm from "@/src/components/contact/contact-form";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with the MJA Bags team. We're here to help with orders, custom requests, wholesale enquiries, and anything else on your mind.",
+    "Get in touch with the MAJ Bags team. We're here to help with orders, custom requests, wholesale enquiries, and anything else on your mind.",
 };
 
 const contactDetails = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@mjabags.com",
+    value: "hello@majbags.com",
     href: "mailto:ibnballo@gmail.com",
     description: "We respond within 24 hours on business days.",
   },
@@ -145,7 +145,7 @@ export default function ContactPage() {
               </p>
               <div className="flex gap-3">
                 <a
-                  href="https://instagram.com/mjabags"
+                  href="https://instagram.com/majbags"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-white border border-cream-200 rounded-xl px-4 py-2.5 text-sm font-medium text-[#1E1E1E] hover:border-olive-400 hover:text-olive-700 transition-all shadow-soft"
