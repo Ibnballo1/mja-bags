@@ -14,8 +14,8 @@ import CartDrawer from "../cart/cart-drawer";
 const navLinks = [
   { href: "/shop", label: "Shop" },
   { href: "/shop?featured=true", label: "Featured" },
-  { href: "/shop?category=totes", label: "Totes" },
-  { href: "/shop?category=clutches", label: "Clutches" },
+  // { href: "/shop?category=totes", label: "Totes" },
+  // { href: "/shop?category=clutches", label: "Clutches" },
   { href: "/about", label: "Our Story" },
 ];
 

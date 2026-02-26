@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { Separator } from "@/src/components/ui/separator";
-import { Instagram, Twitter, Mail } from "lucide-react";
+import { Instagram, Mail, MessageCircle } from "lucide-react";
 
 const footerLinks = {
   Shop: [
     { href: "/shop", label: "All Products" },
     { href: "/shop?featured=true", label: "Featured" },
-    { href: "/shop?category=totes", label: "Totes" },
-    { href: "/shop?category=clutches", label: "Clutches" },
+    // Totes and Clutches removed
   ],
   Company: [
     { href: "/about", label: "Our Story" },
@@ -25,6 +24,12 @@ const footerLinks = {
 };
 
 export default function Footer() {
+  // Professional WhatsApp message encoded for a URL
+  const whatsappMessage = encodeURIComponent(
+    "Hello MAJ Bags, I am reaching out from your website. I am interested in your premium collection and would like to inquire about your latest designs and availability. Looking forward to hearing from you!",
+  );
+  const whatsappUrl = `https://wa.me/2348035660208?text=${whatsappMessage}`;
+
   return (
     <footer className="bg-primary text-primary-foreground mt-24 relative overflow-hidden">
       {/* Subtle background texture */}
@@ -54,15 +59,18 @@ export default function Footer() {
               >
                 <Instagram className="h-5 w-5" />
               </a>
+
+              {/* WhatsApp Link Replacing Twitter */}
               <a
-                href="https://twitter.com"
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full border border-primary-foreground/20 hover:border-secondary hover:text-secondary transition-all"
-                aria-label="Twitter"
+                aria-label="WhatsApp"
               >
-                <Twitter className="h-5 w-5" />
+                <MessageCircle className="h-5 w-5" />
               </a>
+
               <a
                 href="mailto:hello@majbags.com"
                 className="p-2 rounded-full border border-primary-foreground/20 hover:border-secondary hover:text-secondary transition-all"
